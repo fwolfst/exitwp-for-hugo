@@ -477,6 +477,16 @@ class _html2text(HTMLParser.HTMLParser):
             if start: self.quiet += 1
             else: self.quiet -= 1
 
+        if tag == "iframe":
+            if start:
+                self.o("<iframe ")
+                for key,v in attrs.iteritems():
+                  self.o(key + "=")
+                  self.o("\"" + v + "\"" )
+                self.o(">")
+            else:
+                self.o("</iframe>")
+
         if tag == "style":
             if start: self.style += 1
             else: self.style -= 1
